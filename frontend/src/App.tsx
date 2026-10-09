@@ -1,10 +1,9 @@
 import { Routes, Route, Navigate, useLocation } from "react-router-dom";
 import LoginPage from "./pages/LoginPage";
-import DashboardPage from "./pages/DashboardPage";
+import CreateHotelPage from "./pages/CreateHotelPage";
 import { useSession } from "./lib/auth";
 import { isFrontOfficeManager, frontOfficePages } from "./front-office/access";
 import FrontOfficeLayout from "./front-office/FrontOfficeLayout";
-import FrontOfficeDashboard from "./front-office/FrontOfficeDashboard";
 import ReferenceDashboard from "./front-office/ReferenceDashboard";
 import FrontOfficeModule from "./front-office/FrontOfficeModule";
 import ReservationsPage from "./front-office/ReservationsPage";
@@ -23,16 +22,15 @@ function DashboardRoute() {
   const user = useSession();
   const location = useLocation();
   if (!user) return <Navigate to="/login" replace/>;
-  if (isFrontOfficeManager(user.role)) return <FrontOfficeLayout/>;
-  if (location.pathname === "/dashboard") return <DashboardPage/>;
+  if (user.role === "owner" && user.property_id == null) return <CreateHotelPage/>;
+  if (isFrontOfficeManager(user.role) || location.pathname === "/dashboard") return <FrontOfficeLayout/>;
   return <AccessDenied/>;
 }
 function AccessDenied() {
   return <main style={{ padding: 32 }}><h1>Access denied</h1><p>Your role does not have access to this Front Office Manager page.</p><a href="/dashboard">Return to dashboard</a></main>;
 }
 function DashboardIndex() {
-  const user = useSession();
-  return user && isFrontOfficeManager(user.role) ? <ReferenceDashboard/> : null;
+  return <ReferenceDashboard/>;
 }
 export default function App() {
   return <Routes>

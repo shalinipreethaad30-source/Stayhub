@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from "react";
-import { BarChart3, BedDouble, Bell, CalendarDays, ChevronDown, ClipboardCheck, DoorOpen, EllipsisVertical, Hotel, LayoutDashboard, LogOut, Search, Settings, Sparkles, Users, UtensilsCrossed } from "lucide-react";
+import { BarChart3, BedDouble, Bell, CalendarDays, ChevronDown, ClipboardCheck, DoorOpen, EllipsisVertical, Hotel, LayoutDashboard, LogOut, PanelLeftClose, PanelLeftOpen, Search, Settings, Sparkles, Users, UtensilsCrossed } from "lucide-react";
 import { Navigate, useNavigate } from "react-router-dom";
 import { useSession, signOut } from "../lib/auth";
 
@@ -10,6 +10,7 @@ const bookings = [["101","Deluxe Room","Arun Kumar","arun@gmail.com","05 Oct 202
 export default function DashboardPage() {
   const user = useSession(); const navigate = useNavigate();
   const [profileOpen, setProfileOpen] = useState(false);
+  const [sidebarCollapsed, setSidebarCollapsed] = useState(true);
   const profileRef = useRef<HTMLDivElement>(null);
   const profileButtonRef = useRef<HTMLButtonElement>(null);
   useEffect(() => {
@@ -32,8 +33,8 @@ export default function DashboardPage() {
   }, [profileOpen]);
   const logout = () => { signOut(); navigate("/login", { replace: true }); };
   if (!user) return <Navigate to="/login" replace />;
-  return <main className="pms-dashboard">
-    <aside className="pms-sidebar"><div className="pms-logo"><Hotel /><span>★ ★ ★</span></div><nav>{navItems.map(([Icon,label],index)=><a href={`#${label}`} className={index===0?"active":""} key={label}><Icon/>{label}</a>)}</nav><div className="pms-sidebar-art"><img src="/sidebar-plant.jpg" alt="" /></div><button onClick={()=>{signOut();navigate("/login",{replace:true})}}><LogOut/>Sign out</button></aside>
+  return <main className={"pms-dashboard" + (sidebarCollapsed ? " collapsed" : "")}>
+    <aside className="pms-sidebar"><div className="pms-logo"><Hotel /><span>★ ★ ★</span></div><button type="button" className="pms-sidebar-toggle" aria-label={sidebarCollapsed ? "Expand menu" : "Collapse menu"} aria-expanded={!sidebarCollapsed} onClick={() => setSidebarCollapsed(collapsed => !collapsed)}>{sidebarCollapsed ? <PanelLeftOpen/> : <PanelLeftClose/>}</button><nav>{navItems.map(([Icon,label],index)=><a href={`#${label}`} className={index===0?"active":""} key={label} title={sidebarCollapsed ? label : undefined}><Icon/><span>{label}</span></a>)}</nav><div className="pms-sidebar-art"><img src="/sidebar-plant.jpg" alt="" /></div><button className="pms-signout" title={sidebarCollapsed ? "Sign out" : undefined} onClick={()=>{signOut();navigate("/login",{replace:true})}}><LogOut/><span>Sign out</span></button></aside>
     <section className="pms-content"><header className="pms-topbar"><label className="pms-search"><Search/><input placeholder="Search by booking ID, guest name, room number..."/></label><div className="top-actions"><button className="date"><CalendarDays/>05 Oct 2026<ChevronDown/></button><button className="bell"><Bell/><i/></button><div className="profile-dropdown" ref={profileRef} onBlur={event => {
           if (!event.currentTarget.contains(event.relatedTarget as Node | null)) setProfileOpen(false);
         }}>

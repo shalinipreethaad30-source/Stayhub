@@ -331,7 +331,7 @@ export default function LoginPage() {
           <form onSubmit={handleLogin}>
 
             <label htmlFor="email">
-              Email Address
+              Email or Username
             </label>
 
             <div className="input">
@@ -340,8 +340,8 @@ export default function LoginPage() {
 
               <input
                 id="email"
-                type="email"
-                placeholder="Enter your email"
+                type="text"
+                placeholder="Enter your email or username"
                 value={email}
                 required
                 onChange={(e) => {

@@ -6,7 +6,7 @@ export type AuthUser = {
   email: string;
   mobile: string;
   role: string;
-  property_id: number;
+  property_id: number | null;
   name?: string;
 };
 
@@ -43,6 +43,17 @@ export function updateSessionTokens(accessToken: string, refreshToken: string) {
     if (!storage.getItem(USER_KEY)) continue;
     storage.setItem(ACCESS_TOKEN_KEY, accessToken);
     storage.setItem(REFRESH_TOKEN_KEY, refreshToken);
+    window.dispatchEvent(new Event(SESSION_EVENT));
+    return;
+  }
+  throw new Error("No active session was found");
+}
+
+export function updateSessionUser(user: AuthUser, accessToken: string) {
+  for (const storage of [localStorage, sessionStorage]) {
+    if (!storage.getItem(USER_KEY)) continue;
+    storage.setItem(USER_KEY, JSON.stringify(user));
+    storage.setItem(ACCESS_TOKEN_KEY, accessToken);
     window.dispatchEvent(new Event(SESSION_EVENT));
     return;
   }

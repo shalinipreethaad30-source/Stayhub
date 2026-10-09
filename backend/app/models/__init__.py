@@ -5,8 +5,9 @@ from app.models.user import (
     User,
     UserSession,
 )
-from app.models.reservation import CheckIn, CheckOut, Guest, Payment, Reservation
+from app.models.reservation import CheckIn, CheckOut, GroupRoomBlock, Guest, Payment, PaymentMethod, RatePlan, Reservation
 from app.models.reservation_history import ReservationHistory
+from app.models.room import Room
 
 __all__ = [
     "User",
@@ -19,5 +20,9 @@ __all__ = [
     "CheckIn",
     "CheckOut",
     "Payment",
+    "RatePlan",
+    "PaymentMethod",
+    "GroupRoomBlock",
     "ReservationHistory",
+    "Room",
 ]

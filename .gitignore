@@ -1,0 +1,49 @@
+# ==========================
+# Environment files
+# ==========================
+.env
+.env.*
+!.env.example
+*.env.backup
+
+# ==========================
+# Python Backend
+# ==========================
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+venv/
+.venv/
+env/
+ENV/
+
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+
+# ==========================
+# React / Vite Frontend
+# ==========================
+node_modules/
+dist/
+build/
+
+.vite/
+coverage/
+
+# ==========================
+# IDE and OS files
+# ==========================
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+
+# ==========================
+# Logs and temporary files
+# ==========================
+*.log
+*.tmp
+*.bak

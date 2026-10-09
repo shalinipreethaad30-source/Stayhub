@@ -1457,3 +1457,50 @@ footer {
     border-radius: 20px;
   }
 }
+/* ===== Sidebar: collapsible menu (collapsed by default) ===== */
+.pms-dashboard{transition:grid-template-columns .2s ease}
+.pms-dashboard .pms-sidebar>.pms-sidebar-toggle{position:absolute;top:12px;right:10px;z-index:3;display:grid;place-items:center;width:32px;height:32px;margin:0;padding:0;border:0;border-radius:8px;background:transparent;color:#4f6590;cursor:pointer}
+.pms-dashboard .pms-sidebar>.pms-sidebar-toggle:hover{background:#e3ecfb;color:#1d5ff0}
+.pms-dashboard .pms-sidebar>.pms-sidebar-toggle svg{width:20px;height:20px}
+@media(min-width:761px){
+  .pms-dashboard.collapsed{grid-template-columns:76px 1fr}
+  .pms-dashboard.collapsed .pms-sidebar{padding:10px 12px 0}
+  .pms-dashboard.collapsed .pms-sidebar>.pms-sidebar-toggle{position:relative;top:auto;right:auto;margin:0 auto 12px}
+  .pms-dashboard.collapsed .pms-logo svg{width:34px;height:34px}
+  .pms-dashboard.collapsed .pms-logo span,
+  .pms-dashboard.collapsed .pms-sidebar nav a span,
+  .pms-dashboard.collapsed .pms-signout span,
+  .pms-dashboard.collapsed .pms-sidebar-art{display:none}
+  .pms-dashboard.collapsed .pms-sidebar nav a{justify-content:center;gap:0;padding:0}
+  .pms-dashboard.collapsed .pms-sidebar nav a.active:before{left:-12px}
+  .pms-dashboard.collapsed .pms-signout{justify-content:center}
+}
+@media(max-width:760px){.pms-dashboard .pms-sidebar>.pms-sidebar-toggle{display:none}}
+
+/* ===== Owner: Create Hotel (empty state) ===== */
+.ch-page{min-height:100vh;display:flex;flex-direction:column;background:#eef4fd;color:#102a66;font-family:Inter,"Segoe UI",system-ui,sans-serif}
+.ch-topbar{display:flex;justify-content:space-between;align-items:center;padding:16px 32px;background:#fbfdff;border-bottom:1px solid #e3ebf7}
+.ch-brand{display:flex;align-items:center;gap:10px;color:#1c5ce8;font-size:22px;font-weight:700;letter-spacing:-.5px}
+.ch-brand svg{width:28px;height:28px}
+.ch-brand span span{color:#628eeb}
+.ch-user{display:flex;align-items:center;gap:16px;color:#536a94;font-size:14px}
+.ch-user button{display:flex;align-items:center;gap:8px;padding:8px 12px;border:1px solid #dce7fa;border-radius:8px;background:#fff;color:#385583;font:inherit;cursor:pointer}
+.ch-user button svg{width:16px;height:16px}
+.ch-empty{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:40px 16px;text-align:center}
+.ch-icon{display:grid;place-items:center;width:88px;height:88px;margin-bottom:20px;border-radius:24px;background:#e0ebfd;color:#1c5ce8}
+.ch-icon svg{width:44px;height:44px}
+.ch-empty h1{margin:0 0 8px;font-size:26px;color:#07195c}
+.ch-empty>p{max-width:420px;margin:0 0 28px;color:#536a94;font-size:15px;line-height:1.5}
+.ch-primary{display:inline-flex;align-items:center;justify-content:center;gap:8px;padding:12px 22px;border:0;border-radius:10px;background:#2563eb;color:#fff;font:inherit;font-weight:600;cursor:pointer;box-shadow:0 8px 20px #2563eb33}
+.ch-primary:hover{background:#1d55d7}
+.ch-primary:disabled,.ch-secondary:disabled{opacity:.6;cursor:default}
+.ch-primary svg{width:18px;height:18px}
+.ch-form{display:grid;gap:8px;width:min(420px,100%);padding:24px;border-radius:16px;background:#fff;box-shadow:0 6px 18px #1e5cbd14;text-align:left}
+.ch-form label{margin-top:6px;color:#2f395a;font-size:13px;font-weight:600}
+.ch-form label small{color:#7186aa;font-weight:400}
+.ch-form input{padding:11px 14px;border:1px solid #d9e1f0;border-radius:10px;background:#f7f9fd;color:#102a66;font:inherit;font-size:14px;outline:0}
+.ch-form input:focus{border-color:#628eeb;background:#fff}
+.ch-error{margin:4px 0 0;padding:10px 12px;border-radius:8px;background:#fdecee;color:#b42335;font-size:13px}
+.ch-actions{display:flex;justify-content:flex-end;gap:10px;margin-top:12px}
+.ch-secondary{padding:12px 18px;border:1px solid #dce7fa;border-radius:10px;background:#fff;color:#385583;font:inherit;cursor:pointer}
+@media(max-width:560px){.ch-topbar{padding:12px 16px}.ch-user>span{display:none}}
